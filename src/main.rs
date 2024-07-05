@@ -11,6 +11,8 @@ use cmd_args::CmdArgs;
 #[derive(Debug, Clone)]
 struct AppState {
     pub redirect_address: String,
+    pub maintain_path: bool,
+    pub maintain_params: bool,
 }
 
 fn get_custom_address(
@@ -21,16 +23,20 @@ fn get_custom_address(
     let mut address = String::with_capacity(app_state.redirect_address.len() + 256);
     address.push_str(&app_state.redirect_address);
 
-    if let Some(path) = path {
-        address.push('/');
-        address.push_str(path);
+    if app_state.maintain_path {
+        if let Some(path) = path {
+            address.push('/');
+            address.push_str(path);
+        }
     }
 
-    for (i, (key, value)) in params.iter().enumerate() {
-        address.push(if i == 0 { '?' } else { '&' });
-        address.push_str(key);
-        address.push('=');
-        address.push_str(value);
+    if app_state.maintain_params {
+        for (i, (key, value)) in params.iter().enumerate() {
+            address.push(if i == 0 { '?' } else { '&' });
+            address.push_str(key);
+            address.push('=');
+            address.push_str(value);
+        }
     }
 
     address
