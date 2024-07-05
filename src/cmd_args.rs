@@ -1,6 +1,6 @@
 use clap::Parser;
 
-#[derive(Parser)]
+#[derive(Debug, Clone, Parser)]
 pub struct CmdArgs {
     pub host_address: String,
     pub redirect_address: String,
