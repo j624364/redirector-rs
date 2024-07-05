@@ -12,7 +12,10 @@ async fn redirect_root(
 #[tokio::main]
 async fn main() {
     let args = CmdArgs::parse();
-    println!("{} -> {}", args.host_address, args.redirect_address);
+
+    if args.print_listening_message.unwrap_or(false) {
+        println!("{} -> {}", args.host_address, args.redirect_address);
+    }
 
     let listener = tokio::net::TcpListener::bind(&args.host_address)
         .await
