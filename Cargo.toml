@@ -2,6 +2,13 @@
 name = "redirector-rs"
 version = "0.1.0"
 edition = "2021"
+description = "Redirects web traffic to a given address."
+repository = "https://github.com/j624364/redirector.git"
+
+license = "GPL-3.0-or-later"
+
+keywords = ["redirecting", "redirector"]
+categories = ["command-line-utilities", "web-programming::http-server"]
 
 [dependencies]
 axum = "0.7.*"
